@@ -23,9 +23,22 @@ namespace ASMStudio
 	/// </summary>
 	public partial class Window1 : Window
 	{
+		ConfiguradorDeCaminos configuradorPath;
 		public Window1()
 		{
+			bool mostrarConfiguracion=!System.IO.File.Exists(ConfiguradorDeCaminos.PathArchivoConfiguracion);
+			configuradorPath=new ConfiguradorDeCaminos();
+			configuradorPath.Fin+=(s,e)=>{
+				gMain.Children.Clear();
+				//pongo el control Main
+			};
 			InitializeComponent();
+			if(mostrarConfiguracion)
+			{
+				//Se tiene que configurar
+				gMain.Children.Add(configuradorPath);
+				
+			}
 		}
 	}
 }

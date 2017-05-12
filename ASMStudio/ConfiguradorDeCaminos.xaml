@@ -9,7 +9,7 @@
 		</Grid.RowDefinitions>
 		<Grid x:Name="gControlActual"/>
 		<Grid Grid.Row="1">
-			<Button x:Name="btnContinuar" Width="150" HorizontalAlignment="Right" Click="BtnContinuar_Click"/>
+			<Button x:Name="btnContinuar" Content="Continuar" Width="150" HorizontalAlignment="Right" Click="BtnContinuar_Click"/>
 		</Grid>
 	</Grid>
 </UserControl>

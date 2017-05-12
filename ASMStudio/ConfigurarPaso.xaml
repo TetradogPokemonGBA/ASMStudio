@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl
+	x:Class="ASMStudio.ConfigurarPaso" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition
+				Height="9*" />
+			<RowDefinition
+				Height="*" MinHeight="25" />
+		</Grid.RowDefinitions>
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition />
+				<ColumnDefinition />
+			</Grid.ColumnDefinitions>
+			<ScrollViewer VerticalScrollBarVisibility="Auto">
+				<TextBox
+					x:Name="tbxDescripcionPaso" IsReadOnly="True" TextWrapping="Wrap" FontSize="25"/>
+			</ScrollViewer>
+			<Image
+				x:Name="imgPaso"
+				Grid.Column="1" />
+		</Grid>
+		<Grid
+			Grid.Row="1">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition
+					Width="10*" />
+				<ColumnDefinition
+					Width="*" MinWidth="75" />
+			</Grid.ColumnDefinitions>
+			<ScrollViewer  VerticalScrollBarVisibility="Auto">
+				<TextBox
+					x:Name="tbxRutaSeleccionada"
+					IsReadOnly="True" TextWrapping="Wrap"/></ScrollViewer>
+			<Button
+				x:Name="btnBuscarRuta"
+				Grid.Column="1"
+				Content="Buscar Ruta"
+				Click="BtnBuscarRuta_Click" />
+		</Grid>
+	</Grid>
+</UserControl>
