@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <UserControl
 	x:Class="ASMStudio.ConfiguradorDeCaminos" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-	<Grid>
+	<Grid Background="White">
 		<Grid.RowDefinitions>
 			<RowDefinition
 				Height="9*" />
-			<RowDefinition/>
+			<RowDefinition MaxHeight="25"/>
 		</Grid.RowDefinitions>
 		<Grid x:Name="gControlActual"/>
 		<Grid Grid.Row="1">
-			<Button x:Name="btnContinuar" Content="Continuar" Width="150" HorizontalAlignment="Right" Click="BtnContinuar_Click"/>
+			<Button x:Name="btnContinuar" Content="Continuar" Width="75" MaxWidth="75" HorizontalAlignment="Right" Click="BtnContinuar_Click"/>
 		</Grid>
 	</Grid>
 </UserControl>

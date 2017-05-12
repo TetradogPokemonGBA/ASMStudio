@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl
+	x:Class="ASMStudio.Main" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition
+				Height="*" MaxHeight="25"/>
+			<RowDefinition
+				Height="15*" />
+		</Grid.RowDefinitions>
+		<Menu>
+			<MenuItem
+				x:Name="miConfiguracion"
+				Header="Configuración"
+				Click="MiConfiguracion_Click" />
+			<MenuItem
+				x:Name="miSobre"
+				Header="Sobre"
+				Click="MiSobre_Click" />
+		</Menu>
+	</Grid>
+</UserControl>

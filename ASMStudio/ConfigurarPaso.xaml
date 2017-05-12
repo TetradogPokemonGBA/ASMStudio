@@ -6,7 +6,7 @@
 			<RowDefinition
 				Height="9*" />
 			<RowDefinition
-				Height="*" MinHeight="25" />
+				Height="*" MaxHeight="25" />
 		</Grid.RowDefinitions>
 		<Grid>
 			<Grid.ColumnDefinitions>
@@ -15,11 +15,11 @@
 			</Grid.ColumnDefinitions>
 			<ScrollViewer VerticalScrollBarVisibility="Auto">
 				<TextBox
-					x:Name="tbxDescripcionPaso" IsReadOnly="True" TextWrapping="Wrap" FontSize="25"/>
+					x:Name="tbxDescripcionPaso" IsReadOnly="True" TextWrapping="Wrap" FontSize="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
 			</ScrollViewer>
 			<Image
 				x:Name="imgPaso"
-				Grid.Column="1" />
+				Grid.Column="1" MaxHeight="150" />
 		</Grid>
 		<Grid
 			Grid.Row="1">
@@ -27,17 +27,17 @@
 				<ColumnDefinition
 					Width="10*" />
 				<ColumnDefinition
-					Width="*" MinWidth="75" />
+					Width="*" MinWidth="75"/>
 			</Grid.ColumnDefinitions>
 			<ScrollViewer  VerticalScrollBarVisibility="Auto">
 				<TextBox
 					x:Name="tbxRutaSeleccionada"
-					IsReadOnly="True" TextWrapping="Wrap"/></ScrollViewer>
+					IsReadOnly="True" TextWrapping="Wrap" /></ScrollViewer>
 			<Button
 				x:Name="btnBuscarRuta"
 				Grid.Column="1"
 				Content="Buscar Ruta"
-				Click="BtnBuscarRuta_Click" />
+				Click="BtnBuscarRuta_Click" Width="75" MaxWidth="75" HorizontalAlignment="Right"/>
 		</Grid>
 	</Grid>
 </UserControl>
