@@ -1,9 +1,14 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Window
 	x:Class="ASMStudio.Window1" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	Title="ASMStudio"
+
 	Width="439"
-	Height="338">
+	Height="338"
+
+	MinWidth="439"
+	MinHeight="338"
+>
 	<Grid
 		x:Name="gMain" />
 </Window>
