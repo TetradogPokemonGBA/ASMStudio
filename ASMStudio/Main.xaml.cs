@@ -35,7 +35,8 @@ namespace ASMStudio
 		}
 		void MiSobre_Click(object sender, RoutedEventArgs e)
 		{
-			throw new NotImplementedException();
+			if(MessageBox.Show("Esta app esta desarrollada bajo licencia GPL GNU V3\nDesarrollador: Pikachu240\nCréditos:\nAndrea por el compilador.\nJavi4315 por sus conocimientos y ayuda.\nDedicado a Wahack una gran comunidad.\n\n¿Desa ver la pagina web donde esta el codigo fuente?","Sobre la aplicación",MessageBoxButton.YesNo,MessageBoxImage.Information)==MessageBoxResult.Yes)
+				System.Diagnostics.Process.Start("https://github.com/TetradogPokemonGBA/ASMStudio");
 		}
 	}
 }

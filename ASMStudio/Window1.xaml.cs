@@ -27,7 +27,7 @@ namespace ASMStudio
 		Main main;
 		public Window1()
 		{
-			bool mostrarConfiguracion=true;//!System.IO.File.Exists(ConfiguradorDeCaminos.PathArchivoConfiguracion);
+			bool mostrarConfiguracion=!System.IO.File.Exists(ConfiguradorDeCaminos.PathArchivoConfiguracion);
 			main=new Main();
 			main.AbrirConfiguracion+=(s,e)=>	gMain.Children.Add(configuradorPath);
 			configuradorPath=new ConfiguradorDeCaminos();
