@@ -10,6 +10,10 @@
 		</Grid.RowDefinitions>
 		<Menu>
 			<MenuItem
+				x:Name="miLogin"
+				Header="Login"
+				Click="MiLogin_Click" />
+			<MenuItem
 				x:Name="miConfiguracion"
 				Header="Configuración"
 				Click="MiConfiguracion_Click" />

@@ -31,6 +31,12 @@
     <DefineConstants>TRACE</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Gabriel.Cat.Binaris">
+      <HintPath>..\..\..\..\Desktop\Mis Programas\Gabriel.Cat.Binaris\bin\Release\Gabriel.Cat.Binaris.dll</HintPath>
+    </Reference>
+    <Reference Include="Gabriel.Cat.Seguretat">
+      <HintPath>..\..\..\..\Desktop\Mis Programas\Gabriel.Cat.Seguretat\bin\Release\Gabriel.Cat.Seguretat.dll</HintPath>
+    </Reference>
     <Reference Include="Gabriel.Cat.Utilitats">
       <HintPath>..\..\..\..\Desktop\Mis Programas\Gabriel.Cat.Utilitats\Gabriel.Cat.Utilitats\bin\Release\Gabriel.Cat.Utilitats.dll</HintPath>
     </Reference>
@@ -86,6 +92,10 @@
       <DependentUpon>ConfigurarPaso.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="LoginOnWahack.xaml.cs">
+      <DependentUpon>LoginOnWahack.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Main.xaml.cs">
       <DependentUpon>Main.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -104,11 +114,13 @@
   <ItemGroup>
     <Page Include="ConfiguradorDeCaminos.xaml" />
     <Page Include="ConfigurarPaso.xaml" />
+    <Page Include="LoginOnWahack.xaml" />
     <Page Include="Main.xaml" />
     <Page Include="Window1.xaml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources.resx">
