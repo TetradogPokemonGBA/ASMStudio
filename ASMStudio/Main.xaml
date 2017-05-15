@@ -9,6 +9,7 @@
 				Height="15*" />
 		</Grid.RowDefinitions>
 		<Menu>
+			<Image x:Name="imgPerfil"/>
 			<MenuItem
 				x:Name="miLogin"
 				Header="Login"

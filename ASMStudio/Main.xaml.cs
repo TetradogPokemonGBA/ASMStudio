@@ -15,6 +15,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using Gabriel.Cat.Extension;
 
 namespace ASMStudio
 {
@@ -50,7 +51,7 @@ namespace ASMStudio
 				
 				if(login.IsConnected)
 				{
-					miLogin.Icon=login.ImgPerfil;
+					imgPerfil.Source=login.ImgPerfil.Source;
 					miLogin.Header=login.User;
 				}
 			}
