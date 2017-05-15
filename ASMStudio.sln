@@ -6,6 +6,8 @@ VisualStudioVersion = 12.0.20827.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASMStudio", "ASMStudio\ASMStudio.csproj", "{88EECF52-7D32-48D7-8437-5A7E6A0C2633}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RomHackingWebConnector", "..\RomHackingWebConnector\RomHackingWebConnector\RomHackingWebConnector.csproj", "{983BB327-CA4C-48E4-8D95-27FE5E116978}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -16,5 +18,9 @@ Global
 		{88EECF52-7D32-48D7-8437-5A7E6A0C2633}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{88EECF52-7D32-48D7-8437-5A7E6A0C2633}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{88EECF52-7D32-48D7-8437-5A7E6A0C2633}.Release|Any CPU.Build.0 = Release|Any CPU
+		{983BB327-CA4C-48E4-8D95-27FE5E116978}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{983BB327-CA4C-48E4-8D95-27FE5E116978}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{983BB327-CA4C-48E4-8D95-27FE5E116978}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{983BB327-CA4C-48E4-8D95-27FE5E116978}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

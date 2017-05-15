@@ -1,15 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <UserControl
 	x:Class="ASMStudio.Main" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-	<Grid>
-		<Grid.RowDefinitions>
-			<RowDefinition
-				Height="*" MaxHeight="50"/>
-			<RowDefinition
-				Height="15*" />
+	<Grid x:Name="gParent">
+      <Grid.RowDefinitions>
+		<RowDefinition Height="20"/>
+		<RowDefinition Height="6*"/>
+		<RowDefinition Height="2*"/>
 		</Grid.RowDefinitions>
 		<Menu>
-			<Image x:Name="imgPerfil"/>
 			<MenuItem
 				x:Name="miLogin"
 				Header="Login"
@@ -23,5 +21,28 @@
 				Header="Sobre"
 				Click="MiSobre_Click" />
 		</Menu>
+		
+		<Grid
+			x:Name="gMain"
+			Grid.Row="1" />
+		<Grid
+			x:Name="gUser"
+			Grid.Row="2"
+			Visibility="Hidden"
+			>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition
+					Width="1.2695652173913*" />
+				<ColumnDefinition
+					Width="1.43478260869565*" />
+				<ColumnDefinition
+					Width="0.298701298701299*" />
+			</Grid.ColumnDefinitions>
+			<TextBlock
+				x:Name="tbDeveloper"  VerticalAlignment="Bottom"/>
+			<Image
+				x:Name="imgPerfil"
+				Grid.Column="2"  VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+		</Grid>
 	</Grid>
 </UserControl>
