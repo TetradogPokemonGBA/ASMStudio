@@ -40,12 +40,19 @@ namespace ASMStudio
 		}
 		void MiLogin_Click(object sender, RoutedEventArgs e)
 		{
-			LoginOnWahack login=new LoginOnWahack();
-			login.ShowDialog();
-			if(login.IsConnected)
+			LoginOnWahack login;
+			if(miLogin.Header.ToString().Contains("Login"))
 			{
-				//pongo los datos
-				login.LogOut();
+				login=new LoginOnWahack();
+				//espero a que este descargada la web
+				
+				login.ShowDialog();
+				
+				if(login.IsConnected)
+				{
+					miLogin.Icon=login.ImgPerfil;
+					miLogin.Header=login.User;
+				}
 			}
 		}
 	}

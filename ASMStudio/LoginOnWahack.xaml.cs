@@ -12,15 +12,17 @@ using System.IO;
 using System.Net;
 using System.Text;
 using System.Windows;
-//using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Xml;
 using Gabriel.Cat.Extension;
 using Gabriel.Cat.Seguretat;
+
+
 
 namespace ASMStudio
 {
@@ -31,20 +33,21 @@ namespace ASMStudio
 	{
 
 		public const string WEB = "https://wahackforo.com";
-
-		System.Windows.Forms.WebBrowser wbWahack;
-		System.Windows.Forms.HtmlDocument htmlWahackHomePage;
+		const string ENCONTRARNOMBREUSUARIO = "/u-";
+		const string ENCONTRARIMGPERFIL = "profilepic";
 		
-		string user;
+		
+		bool cargada;
+		Uri perfilUser;
 		Image imgPerfil;
 		
 		public LoginOnWahack()
 		{
-			wbWahack = new System.Windows.Forms.WebBrowser();
-			wbWahack.ScriptErrorsSuppressed=true;
-			
 			InitializeComponent();
-		    RecargarPaginaWahack();
+			wbLogin.DocumentCompleted += PaginaCargada;
+			wbLogin.ScriptErrorsSuppressed = true;
+			wbLogin.Navigate(WEB);
+			this.WindowState = WindowState.Minimized;
 		}
 
 		public bool IsConnected {
@@ -54,107 +57,66 @@ namespace ASMStudio
 
 		public string User {
 			get {
-				return user;
+				System.Windows.Forms.HtmlElementCollection linksCollection;
+				if (perfilUser == null && IsConnected) {
+					linksCollection = wbLogin.Document.GetElementById("blackbar").GetElementsByTagName("a");
+					for (int i = 0; i < linksCollection.Count && perfilUser == null; i++)
+						if (linksCollection[i].GetAttribute("href").Contains(ENCONTRARNOMBREUSUARIO))
+							perfilUser = new Uri(new Uri(WEB), linksCollection[i].GetAttribute("href"));
+					
+				}
+				return perfilUser.Segments[perfilUser.Segments.Length - 1];
 			}
-			private set{
-				user=value;
-			}
+			
 		}
 		
 		public Image ImgPerfil {
 			get {
-				System.Windows.Forms.WebBrowser webPerfilUser;
-				System.Windows.Forms.HtmlElementCollection linksHomePage;
-				System.Windows.Forms.HtmlElementCollection imgsPerfil;
-				Uri uriPerfil = null;
-				Uri uriImagenPerfil;
-				if (imgPerfil == null) {
-					linksHomePage = htmlWahackHomePage.GetElementsByTagName("a");
-					//cojo el link del perfil
-					for (int i = 0; i < linksHomePage.Count && uriPerfil == null; i++) {
-						if (linksHomePage[i].InnerText.Contains(User))
-							uriPerfil = new Uri(linksHomePage[i].GetAttribute("href"));
-					}
-					if (uriPerfil != null) {
-						webPerfilUser = new System.Windows.Forms.WebBrowser();
-						webPerfilUser.Navigate(uriPerfil);
-						webPerfilUser.DocumentCompleted += (s, e) => {
-							
-							imgsPerfil = webPerfilUser.Document.GetElementsByTagName("img");
-							for (int i = 0; i < imgsPerfil.Count && imgPerfil == null; i++) {
-								
-								if (imgsPerfil[i].GetAttribute("class") == "profilepic") {
-									uriImagenPerfil = new Uri(linksHomePage[i].GetAttribute("src"));
-									imgPerfil=new Image();
-									imgPerfil.SetImage(uriImagenPerfil);
-								}
-							}
-						};
-						
-						while (imgPerfil == null)
-							System.Threading.Thread.Sleep(250);
-						
-					}
+				WebClient wcPerfil;
+				System.Windows.Forms.HtmlDocument htmlDoc;
+				System.Windows.Forms.HtmlElementCollection linksCollection;
+				string paginaPerfil;
+				if (imgPerfil == null && User != null) {
+					wcPerfil = new WebClient();
+					paginaPerfil = wcPerfil.DownloadString(perfilUser);
+					htmlDoc = GetHtmlDocument(paginaPerfil);
+					linksCollection = htmlDoc.GetElementById("collapseobj_stats_mini").GetElementsByTagName("img");
+					for (int i = 0; i < linksCollection.Count && imgPerfil == null; i++)
+						if (linksCollection[i].OuterHtml.Contains(ENCONTRARIMGPERFIL)) {
+							imgPerfil = new Image();
+							imgPerfil.SetImage(new Uri(linksCollection[i].GetAttribute("href")));
+						}
 					
 				}
 				return imgPerfil;
 			}
 		}
 
-		public void LogOut()
-		{
-			System.Windows.Forms.HtmlElement htmlElementoSalir;
-			try{
-				RecargarPaginaWahack();
-				htmlElementoSalir=htmlWahackHomePage.GetElementById("salir");
-				htmlElementoSalir.InvokeMember("click");
-				//recargo
-				RecargarPaginaWahack();
-			}catch{
-				throw new Exception("No se ha hecho login!!");
-				
-			}
+		public System.Windows.Forms.HtmlDocument GetHtmlDocument(string html)
+		{//sacado de http://stackoverflow.com/questions/4935446/string-to-htmldocument
+			System.Windows.Forms.WebBrowser browser = new System.Windows.Forms.WebBrowser();
+			browser.ScriptErrorsSuppressed = true;
+			browser.DocumentText = html;
+			browser.Document.OpenNew(true);
+			browser.Document.Write(html);
+			browser.Refresh();
+			return browser.Document;
 		}
-		void RecargarPaginaWahack()
-		{
-			btnLogin.IsEnabled=false;
-			wbWahack.Navigate(WEB);
-			wbWahack.DocumentCompleted += (s, pagina) => {
-				Action act;
-				htmlWahackHomePage = wbWahack.Document;
-				
-				act=()=>btnLogin.IsEnabled = true;
-				Dispatcher.BeginInvoke(act);
-			};
-			while(!btnLogin.IsEnabled&&IsVisible)
-				System.Threading.Thread.Sleep(250);
-		}
-		void btnLogin_Click(object sender, RoutedEventArgs e)
-		{
-			System.Windows.Forms.HtmlDocument htmlLogin;
-			System.Windows.Forms.HtmlElementCollection inputs;
-			System.Windows.Forms.HtmlElement elementoSubmit=null;
-			htmlLogin=htmlWahackHomePage;
-			if (!String.IsNullOrEmpty(tbxUsuario.Text) && !String.IsNullOrEmpty(pbxPassword.Password)) {
-				User = tbxUsuario.Text;
 		
-				htmlLogin.GetElementById("navbar_username").InnerText=User;
-				htmlLogin.GetElementById("navbar_password").InnerText=pbxPassword.Password;
-				inputs=htmlLogin.GetElementsByTagName("input");
-				for(int i=0;i<inputs.Count&&elementoSubmit==null;i++)
-					if(inputs[i].GetAttribute("value")=="Iniciar Sesión")
-						elementoSubmit=inputs[i];
-				elementoSubmit.InvokeMember("click");
-				RecargarPaginaWahack();
-				IsConnected=htmlWahackHomePage.GetElementsByTagName("body")[0].InnerHtml.Contains(User);
+
+		void PaginaCargada(Object sender, System.Windows.Forms.WebBrowserDocumentCompletedEventArgs e)
+		{
+			IsConnected = wbLogin.Document.GetElementById("memberbar").OuterHtml.Contains("salir");
+			try {
 				if (IsConnected)
 					this.Close();
 				else
-					MessageBox.Show("No se ha hecho login, mira si hay algun error en los campos y vuelve a intentarlo");
-			} else {
-				MessageBox.Show("Faltan campos por rellenar!");
-				
+					this.WindowState = WindowState.Normal;
+			} catch {
+			} finally {
+				cargada = true;
 			}
 		}
+
 	}
 }

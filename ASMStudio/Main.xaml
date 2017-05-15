@@ -4,7 +4,7 @@
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition
-				Height="*" MaxHeight="25"/>
+				Height="*" MaxHeight="50"/>
 			<RowDefinition
 				Height="15*" />
 		</Grid.RowDefinitions>
