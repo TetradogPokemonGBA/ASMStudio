@@ -8,6 +8,7 @@
  */
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -42,6 +43,7 @@ namespace ASMStudio
 		void MiLogin_Click(object sender, RoutedEventArgs e)
 		{
 			LoginOnWahack login;
+			MenuItem miSalir;
 			if(miLogin.Header.ToString().Contains("Login"))
 			{
 				login=new LoginOnWahack();
@@ -53,6 +55,25 @@ namespace ASMStudio
 				{
 					imgPerfil.Source=login.ImgPerfil.Source;
 					miLogin.Header=login.User;
+					miSalir=new MenuItem();
+					miSalir.Header="Salir";
+					miSalir.Click+=(s,m)=>
+					{	
+						LoginOnWahack logout=(LoginOnWahack)miLogin.Tag;
+						
+						logout.Salir();
+						if(!logout.IsConnected)
+						{
+							imgPerfil.SetImage(new Bitmap(1,1));
+							miLogin.Header="Login";
+							miLogin.Items.Clear();
+							miLogin.Click+=MiLogin_Click;
+						}
+					
+					};
+					miLogin.Tag=login;
+					miLogin.Items.Add(miSalir);
+					miLogin.Click-=MiLogin_Click;
 				}
 			}
 		}

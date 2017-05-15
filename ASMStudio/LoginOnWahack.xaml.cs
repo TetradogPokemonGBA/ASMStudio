@@ -47,9 +47,22 @@ namespace ASMStudio
 			wbLogin.DocumentCompleted += PaginaCargada;
 			wbLogin.ScriptErrorsSuppressed = true;
 			wbLogin.Navigate(WEB);
-			this.WindowState = WindowState.Minimized;
+			
+			try
+			{
+				System.Net.IPHostEntry host = System.Net.Dns.GetHostEntry("www.google.com");
+				this.WindowState = WindowState.Minimized;
+
+			}
+			catch (Exception es)
+			{
+
+				this.WindowState = WindowState.Normal;
+			}
+
 		}
 
+		
 		public bool IsConnected {
 			get;
 			private	set;
@@ -83,9 +96,9 @@ namespace ASMStudio
 					linksCollection = htmlDoc.GetElementById("collapseobj_stats_mini").GetElementsByTagName("img");
 					for (int i = 0; i < linksCollection.Count && imgPerfil == null; i++)
 						if (linksCollection[i].OuterHtml.Contains(ENCONTRARIMGPERFIL)) {
-							imgPerfil = new Image();
-							imgPerfil.SetImage(new Uri(linksCollection[i].GetAttribute("href")));
-						}
+						imgPerfil = new Image();
+						imgPerfil.SetImage(new Uri(linksCollection[i].GetAttribute("href")));
+					}
 					
 				}
 				return imgPerfil;
@@ -118,5 +131,19 @@ namespace ASMStudio
 			}
 		}
 
+		public void Salir()
+		{
+			LoginOnWahack aux;
+			if(IsConnected)
+			{
+				wbLogin.Document.GetElementById("salir").InvokeMember("click");
+				aux= new LoginOnWahack();
+				aux.wbLogin.Navigated+=(s,e)=>IsConnected=aux.IsConnected;
+				aux.ShowDialog();
+				aux.Close();
+				
+				
+			}
+		}
 	}
 }
