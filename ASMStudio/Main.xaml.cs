@@ -20,6 +20,7 @@ using Gabriel.Cat.Extension;
 
 namespace ASMStudio
 {
+	
 	/// <summary>
 	/// Interaction logic for Main.xaml
 	/// </summary>
