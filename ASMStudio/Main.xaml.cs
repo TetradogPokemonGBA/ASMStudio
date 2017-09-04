@@ -36,7 +36,6 @@ namespace ASMStudio
 			login = new RomHackingWebConnector.WahackConnector();
 			login.Conectado += Conectado;
 			login.Desconectado += Desconectado;
-			login.Visibility = Visibility.Hidden;
 			//es el ultimo
 			gMain.Children.Add(login);
 			rowUser = gParent.RowDefinitions[2];
@@ -65,8 +64,6 @@ namespace ASMStudio
 		void Desconectado(object sender = null, EventArgs e = null)
 		{
 			if (!miLogin.Header.ToString().Contains("Login")) {
-				
-				
 				login.Salir();
 				if (!login.EstaConectado) {
 					miLogin.Header = "Login";
@@ -78,7 +75,7 @@ namespace ASMStudio
 					gUser.Visibility = Visibility.Hidden;
 					gParent.RowDefinitions.Remove(rowUser);
 				}
-			}
+			}//else seria si el autologin devuelve false asi que no me interesa molestar al usuario con algo que hago además
 		}
 		void MiConfiguracion_Click(object sender, RoutedEventArgs e)
 		{
